@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 const AppWrapper = ({ chid }: any) => {
   return (
-    <div className="flex flex-col justify-between h-screen">
+    <div className="flex flex-col justify-between h-screen w-full">
       <div>
         <Navbar />
       </div>
