@@ -3,12 +3,41 @@ import MiddleBanner from "../assets/images/Frame 33.png";
 import MiddleBanner2 from "../assets/images/Frame 34.png";
 import ProductCard1 from "../components/ProductCard1";
 import { FaSearch } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+export interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}
 
 const Home = () => {
-  const [products, setProducts] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [prev, setPrev] = useState(0);
   const [next, setNext] = useState(4);
+
+  const fetchProducts = async () => {
+    try {
+      const res: { data: Product[] } = await axios.get(
+        "https://fakestoreapi.com/products"
+      );
+      setProducts(res.data);
+    } catch (error) {
+      alert("Error fetching products");
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
     <main className="flex flex-col gap-10">
@@ -33,7 +62,7 @@ const Home = () => {
                 {products.slice(prev, next).map((product) => {
                   return (
                     <>
-                      <ProductCard1 isShowFooter />
+                      <ProductCard1 isShowFooter productInfo={product} />
                     </>
                   );
                 })}
@@ -104,15 +133,19 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="flex gap-3 items-center flex-wrap">
-        {[1, 2, 3].map((product) => {
+      <div className="flex gap-3 items-center flex-wrap mt-8 mb-8">
+        {products.map((product) => {
           return (
             <>
               <ProductCard1
+                productInfo={product}
                 isShowFooter
                 middleSection={
                   <div className="flex flex-col gap-2 items-center">
-                    <span className="text-[20px] text-white font-bold"> Men</span>
+                    <span className="text-[20px] text-purple-400 font-bold">
+                      {" "}
+                      {product.category}
+                    </span>
                     <button
                       type="button"
                       className="text-black bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -140,7 +173,7 @@ const Home = () => {
           {products.map((product) => {
             return (
               <>
-                <ProductCard1 isShowFooter />
+                <ProductCard1 productInfo={product} isShowFooter />
               </>
             );
           })}
@@ -154,6 +187,7 @@ const Home = () => {
             return (
               <>
                 <ProductCard1
+                  productInfo={product}
                   middleSection={<span className="font-bold">Brand</span>}
                 />
               </>

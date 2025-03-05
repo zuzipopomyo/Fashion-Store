@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { FaSearch, FaRegHeart } from "react-icons/fa";
 import IconButton from "./IconButton";
+import { Product } from "../pages/Home";
 
 const ProductCard1 = ({
+  productInfo,
   isShowFooter = false,
   middleSection,
 }: {
+  productInfo: Product;
   isShowFooter?: boolean;
   middleSection?: React.ReactNode;
 }) => {
@@ -35,7 +38,7 @@ const ProductCard1 = ({
         <a href="#">
           <img
             className="p-8 rounded-t-lg w-full h-full object-cover"
-            src="https://d1it09c4puycyh.cloudfront.net/920x1300/catalog/product/8/9/8907884363547_1.jpg"
+            src={productInfo.image}
             alt="product image"
           />
         </a>
@@ -43,8 +46,8 @@ const ProductCard1 = ({
 
       {isShowFooter && (
         <div className="flex-col flex items-center gap-2">
-          <h4 className="font-bold">Woman in Red Coat</h4>
-          <span className="text-purple-500 font-bold">$89</span>
+          <h4 className="font-bold break-words">{productInfo.title}</h4>
+          <span className="text-purple-500 font-bold">{productInfo.price}</span>
         </div>
       )}
     </div>
