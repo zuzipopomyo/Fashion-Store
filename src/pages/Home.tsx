@@ -11,7 +11,7 @@ export interface Product {
   title: string;
   price: number;
   description: string;
-  category: string; 
+  category: string;
   image: string;
   rating: {
     rate: number;
@@ -21,8 +21,19 @@ export interface Product {
 
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [allCategoryProducts, setAllCategoryProducts] = useState();
   const [prev, setPrev] = useState(0);
   const [next, setNext] = useState(4);
+
+  function groupProductsByCategory(products: Product[]) {
+    return products.reduce((acc: any, product) => {
+      if (!acc[product.category]) {
+        acc[product.category] = [];
+      }
+      acc[product.category].push(product);
+      return acc;
+    }, {});
+  }
 
   const fetchProducts = async () => {
     try {
@@ -30,6 +41,8 @@ const Home = () => {
         "https://fakestoreapi.com/products"
       );
       setProducts(res.data);
+      const categorizeProducts = groupProductsByCategory(res.data);
+      setAllCategoryProducts(categorizeProducts);
     } catch (error) {
       alert("Error fetching products");
     }
@@ -40,12 +53,12 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="flex flex-col gap-10">
+    <main className="flex flex-col gap-10 items-center">
       <div>
-        <img src={TopBannerImg} />
+        <img className="w-screen" src={TopBannerImg} />
       </div>
       <div>
-        <img src={MiddleBanner} />
+        <img className="w-screen" src={MiddleBanner} />
       </div>
 
       <div>
@@ -58,7 +71,7 @@ const Home = () => {
         >
           <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
             <div className="duration-700 ease-in-out">
-              <div className="flex gap-3 items-center">
+              <div className="flex gap-3 items-center justify-center">
                 {products.slice(prev, next).map((product) => {
                   return (
                     <>
@@ -133,43 +146,42 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="flex gap-3 items-center flex-wrap mt-8 mb-8">
-        {products.map((product) => {
-          return (
-            <>
-              <ProductCard1
-                productInfo={product}
-                isShowFooter
-                middleSection={
-                  <div className="flex flex-col gap-2 items-center">
-                    <span className="text-[20px] text-purple-400 font-bold">
-                      {" "}
-                      {product.category}
-                    </span>
-                    <button
-                      type="button"
-                      className="text-black bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    >
-                      <FaSearch />
-                      Shop Now
-                    </button>
-                  </div>
-                }
-              />
-            </>
-          );
-        })}
+      <div className="flex gap-3 items-center flex-wrap mt-8 mb-8 justify-center">
+        {allCategoryProducts &&
+          Object.entries(allCategoryProducts).map(([category, product]) => {
+            return (
+              <>
+                <ProductCard1
+                  productInfo={(product as any)[0] as any}
+                  middleSection={
+                    <div className="flex flex-col gap-2 items-center">
+                      <span className="text-[20px] text-purple-400 font-bold">
+                        {category}
+                      </span>
+                      <button
+                        type="button"
+                        className="text-black bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      >
+                        <FaSearch />
+                        Shop Now
+                      </button>
+                    </div>
+                  }
+                />
+              </>
+            );
+          })}
       </div>
 
       <div>
-        <img src={MiddleBanner2} />
+        <img className="w-screen" src={MiddleBanner2} />
       </div>
 
       <div>
         <h3 className="text-center font-bold text-3xl mb-10">
           Best Weekend Seller
         </h3>
-        <div className="flex gap-3 items-center flex-wrap">
+        <div className="flex gap-3 items-center flex-wrap justify-center">
           {products.map((product) => {
             return (
               <>
@@ -181,16 +193,14 @@ const Home = () => {
       </div>
 
       <div>
-        <h3 className="text-center font-bold text-3xl mb-10">Brand</h3>
-        <div className="flex items-center flex-wrap">
+        <h3 className="text-center font-bold text-3xl mb-10 ">Brand</h3>
+        <div className="flex items-center flex-wrap justify-center">
           {products.map((product) => {
             return (
-              <>
-                <ProductCard1
-                  productInfo={product}
-                  middleSection={<span className="font-bold">Brand</span>}
-                />
-              </>
+              <ProductCard1
+                productInfo={product}
+                middleSection={<span className="font-bold">Brand</span>}
+              />
             );
           })}
         </div>
