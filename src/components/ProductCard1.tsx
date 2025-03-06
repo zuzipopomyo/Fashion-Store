@@ -29,8 +29,8 @@ const ProductCard1 = ({
         ) : (
           isShow && (
             <div className="flex align-items-center gap-2 absolute top-[45%] left-[35%] opacity-100 group-hover:!opacity-100">
-              <IconButton icon={<FaSearch />} />{" "}
-              <IconButton icon={<FaRegHeart />} />
+              {/* <IconButton icon={<FaSearch />} />{" "} */}
+              {/* <IconButton icon={<FaRegHeart />} /> */}
             </div>
           )
         )}
