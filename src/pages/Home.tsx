@@ -1,10 +1,12 @@
 import TopBannerImg from "../assets/images/Frame 5.png";
 import MiddleBanner from "../assets/images/Frame 33.png";
 import MiddleBanner2 from "../assets/images/Frame 34.png";
-import ProductCard1 from "../components/ProductCard1";
+import ProductCard from "../components/ProductCard";
 import { FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { all } from "axios";
+import useProductStore from "../store/useProductStore";
+import { useNavigate } from "react-router-dom";
 
 export interface Product {
   id: number;
@@ -20,10 +22,15 @@ export interface Product {
 }
 
 const Home = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [allCategoryProducts, setAllCategoryProducts] = useState();
+  const {
+    allProducts,
+    categorizedProducts,
+    setAllProducts,
+    setCategorizedProducts,
+  } = useProductStore();
   const [prev, setPrev] = useState(0);
   const [next, setNext] = useState(4);
+  const navigate = useNavigate()
 
   function groupProductsByCategory(products: Product[]) {
     return products.reduce((acc: any, product) => {
@@ -40,9 +47,9 @@ const Home = () => {
       const res: { data: Product[] } = await axios.get(
         "https://fakestoreapi.com/products"
       );
-      setProducts(res.data);
+      setAllProducts(res.data);
       const categorizeProducts = groupProductsByCategory(res.data);
-      setAllCategoryProducts(categorizeProducts);
+      setCategorizedProducts(categorizeProducts);
     } catch (error) {
       alert("Error fetching products");
     }
@@ -72,10 +79,11 @@ const Home = () => {
           <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
             <div className="duration-700 ease-in-out">
               <div className="flex gap-3 items-center justify-center">
-                {products.slice(prev, next).map((product) => {
+                {allProducts &&
+                  allProducts.slice(prev, next).map((product) => {
                   return (
                     <>
-                      <ProductCard1 isShowFooter productInfo={product} />
+                      <ProductCard isShowFooter productInfo={product} />
                     </>
                   );
                 })}
@@ -115,7 +123,7 @@ const Home = () => {
           </button>
           <button
             onClick={() => {
-              if (next < products.length - 4) {
+              if (next < allProducts.length - 4) {
                 setNext(next + 1);
                 setPrev(prev + 1);
               }
@@ -147,18 +155,19 @@ const Home = () => {
       </div>
 
       <div className="flex gap-3 items-center flex-wrap mt-8 mb-8 justify-center">
-        {allCategoryProducts &&
-          Object.entries(allCategoryProducts).map(([category, product]) => {
+        {categorizedProducts &&
+          Object.entries(categorizedProducts).map(([category, product]) => {
             return (
               <>
-                <ProductCard1
+                <ProductCard
                   productInfo={(product as any)[0] as any}
                   middleSection={
-                    <div className="flex flex-col gap-2 items-center">
-                      <span className="text-[20px] text-purple-400 font-bold">
+                    <div className="flex flex-col gap-2 items-center justify-center">
+                      <span className="text-[22px] text-red-700 font-bold capitalize">
                         {category}
                       </span>
                       <button
+                        onClick={()=>navigate('product-category/'+ category)}
                         type="button"
                         className="text-black bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
@@ -182,10 +191,11 @@ const Home = () => {
           Best Weekend Seller
         </h3>
         <div className="flex gap-3 items-center flex-wrap justify-center">
-          {products.map((product) => {
+          {allProducts &&
+            allProducts.slice(0, 4).map((product) => {
             return (
               <>
-                <ProductCard1 productInfo={product} isShowFooter />
+                <ProductCard productInfo={product} isShowFooter />
               </>
             );
           })}
@@ -195,9 +205,10 @@ const Home = () => {
       <div>
         <h3 className="text-center font-bold text-3xl mb-10 ">Brand</h3>
         <div className="flex items-center flex-wrap justify-center">
-          {products.map((product) => {
+          {allProducts &&
+            allProducts.slice(0, 4).map((product) => {
             return (
-              <ProductCard1
+              <ProductCard
                 productInfo={product}
                 middleSection={<span className="font-bold">Brand</span>}
               />
