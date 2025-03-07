@@ -20,7 +20,7 @@ const ProductCard = ({
         onMouseEnter={() => setIsShow(true)}
         onMouseLeave={() => setIsShow(false)}
         style={{height: "380px", width: "280px"}}
-        className="relative hover:opacity-40 max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+        className="relative hover:opacity-40 max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm "
       >
         {/* TODO: make iconbotton visible on hover, try to avoid using state , use css instead */}
         {middleSection ? (

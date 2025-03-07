@@ -2,7 +2,7 @@ import { IoSend } from "react-icons/io5";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-300 dark:bg-gray-900 w-full px-10">
+    <footer className="bg-gray-300  w-full px-10">
       <div className="mx-auto w-full">
         <div className="flex gap-10 items-center justify-around">
           <div className="w-[400px]">
@@ -17,7 +17,7 @@ const Footer = () => {
               <div className="flex">
                 <label
                   htmlFor="search-dropdown"
-                  className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+                  className="mb-2 text-sm font-medium text-gray-900 sr-only "
                 >
                   Your Email
                 </label>
@@ -26,13 +26,13 @@ const Footer = () => {
                   <input
                     type="search"
                     id="search-dropdown"
-                    className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                    className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500     "
                     placeholder="Enter Email"
                     required
                   />
                   <button
                     type="submit"
-                    className="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-purple-700 rounded-e-lg border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-purple-700 rounded-e-lg border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 "
                   >
                     <IoSend />
                   </button>
@@ -43,10 +43,10 @@ const Footer = () => {
 
           <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase ">
                 Company
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="text-gray-500  font-medium">
                 <li className="mb-4">
                   <a href="#" className=" hover:underline">
                     About
@@ -70,10 +70,10 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase ">
                 Help center
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="text-gray-500  font-medium">
                 <li className="mb-4">
                   <a href="#" className="hover:underline">
                     Discord Server
@@ -97,10 +97,10 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase ">
                 Legal
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="text-gray-500  font-medium">
                 <li className="mb-4">
                   <a href="#" className="hover:underline">
                     Privacy Policy
@@ -119,10 +119,10 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase ">
                 Download
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="text-gray-500  font-medium">
                 <li className="mb-4">
                   <a href="#" className="hover:underline">
                     iOS
@@ -148,15 +148,15 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="px-4 py-6 bg-gray-300 dark:bg-gray-700 md:flex md:items-center md:justify-between">
-          <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
+        <div className="px-4 py-6 bg-gray-300  md:flex md:items-center md:justify-between">
+          <span className="text-sm text-gray-500  sm:text-center">
             © 2023 <a href="https://flowbite.com/">Flowbite™</a>. All Rights
             Reserved.
           </span>
           <div className="flex mt-4 sm:justify-center md:mt-0 space-x-5 rtl:space-x-reverse">
             <a
               href="#"
-              className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+              className="text-gray-400 hover:text-gray-900 "
             >
               <svg
                 className="w-4 h-4"
@@ -175,7 +175,7 @@ const Footer = () => {
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+              className="text-gray-400 hover:text-gray-900 "
             >
               <svg
                 className="w-4 h-4"
@@ -190,7 +190,7 @@ const Footer = () => {
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+              className="text-gray-400 hover:text-gray-900 "
             >
               <svg
                 className="w-4 h-4"
@@ -209,7 +209,7 @@ const Footer = () => {
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+              className="text-gray-400 hover:text-gray-900 "
             >
               <svg
                 className="w-4 h-4"
@@ -228,7 +228,7 @@ const Footer = () => {
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+              className="text-gray-400 hover:text-gray-900 "
             >
               <svg
                 className="w-4 h-4"
