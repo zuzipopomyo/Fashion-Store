@@ -49,7 +49,7 @@ const ProductDetail = () => {
   const ImgSection = () => (
     <div style={{ flex: 1 }} className="flex flex-col gap-8">
       {/*image view  */}
-      <div className="flex gap-0 h-[480px] w-[580px] overflow-hidden">
+      <div className="flex gap-0 h-[350px] w-[450px] overflow-hidden">
         <img
           className="h-full w-full"
           src={productDetail?.image}
@@ -98,7 +98,7 @@ const ProductDetail = () => {
   );
 
   const InfoSection = () => (
-    <div style={{ flex: 1 }} className="flex flex-col gap-4">
+    <div style={{ flex: 1 }} className="flex w-[350px] flex-col gap-4">
       <span className="capitalize font-semibold">
         {productDetail?.category}
       </span>
@@ -200,10 +200,10 @@ const ProductDetail = () => {
   );
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="flex gap-20 px-24 !pb-0 pt-10">
+    <div className="flex flex-col justify-center items-center"> 
+      <div className="flex gap-24 mx-24 !pb-0 pt-10 border px-[50px]">
         <ImgSection />
-        <InfoSection />
+        <InfoSection/>
       </div>
 
       <CustomerReview />

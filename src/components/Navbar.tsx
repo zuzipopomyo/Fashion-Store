@@ -18,13 +18,13 @@ const Navbar = () => {
               Fashion Store
             </span>
           </a>
-          <div className="flex gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <div className="flex items-center justify-between gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <FaSearch />
-            <IconButton
+            <IconButton 
               onClick={() => setShowCartDrawer(true)}
               icon={
                 <>
-                  <FaShoppingCart />
+                  <FaShoppingCart/>
                   {addedProducts.length}
                 </>
               }

@@ -70,14 +70,14 @@ const Home = () => {
       </div>
 
       <div>
-        <h3 className="text-center font-bold text-3xl mb-10"> New Arrivals</h3>
+        <h3 className="text-center font-semibold text-2xl mb-10 pt-6"> New Arrivals</h3>
 
         <div
           id="controls-carousel"
-          className="relative w-full"
+          className="relative w-full my-10"
           data-carousel="static"
         >
-          <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+          <div className="relative h-80 overflow-hidden rounded-lg md:h-96">
             <div className="duration-700 ease-in-out">
               <div className="flex gap-3 items-center justify-center">
                 {allProducts &&
