@@ -4,7 +4,7 @@ import MiddleBanner2 from "../assets/images/Frame 34.png";
 import ProductCard from "../components/ProductCard";
 import { FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import axios, { all } from "axios";
+import axios from "axios";
 import useProductStore from "../store/useProductStore";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +15,7 @@ export interface Product {
   description: string;
   category: string;
   image: string;
+  quantity: number;
   rating: {
     rate: number;
     count: number;

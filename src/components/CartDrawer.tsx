@@ -1,36 +1,15 @@
 import { useNavigate } from "react-router";
-import { Product } from "../pages/Home";
 import useCartStore from "../store/useCartStore";
 import { CartItems } from "./CartItems";
 import IconButton from "./IconButton";
 export interface IAddedOrder {
   productId: number;
   quantity: number;
-  productInfo: Product;
 }
 
 const CartDrawer = ({ onClose }: { onClose: () => void }) => {
   const { addedProducts } = useCartStore();
   const navigate = useNavigate();
-  function convertAddedProductsToOrder(addedProducts: Product[]) {
-    const productMap = new Map();
-
-    addedProducts.forEach((item) => {
-      if (productMap.has(item.id)) {
-        productMap.get(item.id).quantity += 1;
-      } else {
-        productMap.set(item.id, {
-          productId: item.id,
-          productInfo: item,
-          quantity: 1,
-        });
-      }
-    });
-
-    return Array.from(productMap.values());
-  }
-
-  const addedOrders: IAddedOrder[] = convertAddedProductsToOrder(addedProducts);
 
   return (
     <div
@@ -42,7 +21,7 @@ const CartDrawer = ({ onClose }: { onClose: () => void }) => {
           id="drawer-right-label"
           className="inline-flex text-2xl items-center mb-4 font-bold text-black "
         >
-          Shopping Bag ({addedOrders.length} items)
+          Shopping Bag ({addedProducts.length} items)
         </h5>
         <IconButton
           onClick={onClose}
@@ -66,12 +45,11 @@ const CartDrawer = ({ onClose }: { onClose: () => void }) => {
         />
       </div>
 
-      <CartItems addedOrders={addedOrders} />
+      <CartItems />
 
       <div className="relative">
         <button
           onClick={() => {
-
             navigate("/purchaseOrder");
             onClose();
           }}
@@ -89,7 +67,7 @@ const CartDrawer = ({ onClose }: { onClose: () => void }) => {
           </svg>
           <span>
             Checkout - $
-            {addedProducts.reduce((a, b) => a + b.price, 0).toFixed(2)}
+            {addedProducts.reduce((a, b) => a + (b.price * (b?.quantity || 1)), 0).toFixed(2)}
           </span>
         </button>
       </div>

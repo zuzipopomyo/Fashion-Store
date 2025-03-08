@@ -1,12 +1,10 @@
 import { FaUser, FaSearch, FaShoppingCart } from "react-icons/fa";
 import useCartStore from "../store/useCartStore";
 import IconButton from "./IconButton";
-import { useState } from "react";
 import CartDrawer from "./CartDrawer";
 
 const Navbar = () => {
-  const { addedProducts } = useCartStore();
-  const [showCartDrawer, setShowCartDrawer] = useState(false);
+  const { addedProducts, showCartDrawer, setShowCartDrawer } = useCartStore();
 
   return (
     <div className="relative mb-[74px]">

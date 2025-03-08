@@ -5,10 +5,17 @@ import { Product } from "./Home";
 import { useParams } from "react-router-dom";
 import IconButton from "../components/IconButton";
 import { FaMinus, FaPlus, FaRegHeart } from "react-icons/fa";
+import useCartStore from "../store/useCartStore";
 
 const ProductDetail = () => {
   const { id: productId } = useParams();
-  const [productDetail, setProductDetail] = useState<Product | null>(null);
+  const { addToCart, addedProducts, setShowCartDrawer, updateQuantity } =
+    useCartStore();
+  const [quantity, setQuantity] = useState(1);
+  const [productDetail, setProductDetail] = useState<Product>();
+  const isProductAlreadyAdded = addedProducts?.find(
+    (i) => i.id === +productId!
+  );
 
   const fetchProductDetail = async () => {
     try {
@@ -21,9 +28,23 @@ const ProductDetail = () => {
     }
   };
 
+  const onAddToCart = () => {
+    isProductAlreadyAdded &&
+      isProductAlreadyAdded.quantity !== quantity &&
+      updateQuantity(+productId!, quantity);
+
+    !isProductAlreadyAdded && addToCart(productDetail!, quantity);
+  
+    setShowCartDrawer(true);
+  };
+
   useEffect(() => {
     fetchProductDetail();
   }, [productId]);
+
+  useEffect(() => {
+    if (isProductAlreadyAdded) setQuantity(isProductAlreadyAdded.quantity);
+  }, [addedProducts]);
 
   const ImgSection = () => (
     <div style={{ flex: 1 }} className="flex flex-col gap-8">
@@ -129,12 +150,12 @@ const ProductDetail = () => {
         <span className="font-semibold">Quantity</span>
         <div className="flex gap-2 items-center">
           <IconButton
-            //   onClick={() => removeOneQuantity(product.productId)}
+            onClick={() => setQuantity(Math.max(1, quantity - 1))}
             icon={<FaMinus />}
           />
-          <span>{10}</span>
+          <span>{quantity}</span>
           <IconButton
-            //   onClick={() => addToCart(product.productInfo)}
+            onClick={() => setQuantity(Math.min(10, quantity + 1))}
             icon={<FaPlus />}
           />
         </div>
@@ -146,6 +167,7 @@ const ProductDetail = () => {
       </div>
 
       <button
+        onClick={onAddToCart}
         type="button"
         className="text-white w-full bg-purple-600 hover:bg-purple-800 px-5 py-4 flex justify-center items-center"
       >
