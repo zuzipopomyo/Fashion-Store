@@ -5,6 +5,7 @@ import ProductDetail from "./pages/ProductDetail";
 import ProductCategory from "./pages/ProductCategory";
 import PurchaseCompletion from "./pages/PurchaseCompletion";
 import AboutUs from "./pages/AboutUs";
+import PurchaseOrder from "./pages/PurchaseOrder";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/product-category/:name" element={<ProductCategory />} />
           <Route path="/product-detail/:id" element={<ProductDetail />} />
           <Route path="/purchase-completion" element={<PurchaseCompletion />} />
+          <Route path="/purchaseOrder" element={<PurchaseOrder />} />
           <Route path="/aboutus" element={<AboutUs />} />
 
         </Route>

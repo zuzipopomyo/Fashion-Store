@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { Product } from "../pages/Home";
 import useCartStore from "../store/useCartStore";
 import { CartItems } from "./CartItems";
@@ -10,7 +11,7 @@ export interface IAddedOrder {
 
 const CartDrawer = ({ onClose }: { onClose: () => void }) => {
   const { addedProducts } = useCartStore();
-
+  const navigate = useNavigate();
   function convertAddedProductsToOrder(addedProducts: Product[]) {
     const productMap = new Map();
 
@@ -69,6 +70,11 @@ const CartDrawer = ({ onClose }: { onClose: () => void }) => {
 
       <div className="relative">
         <button
+          onClick={() => {
+
+            navigate("/purchaseOrder");
+            onClose();
+          }}
           type="button"
           className="absolute bottom-[34px] text-white w-full bg-purple-600 hover:bg-purple-800 px-5 py-4 flex justify-center items-center"
         >
