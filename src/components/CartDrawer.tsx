@@ -34,7 +34,7 @@ const CartDrawer = ({ onClose }: { onClose: () => void }) => {
           onClick={onClose}
           icon={
             <svg
-              className="w-3 h-3"
+              className="w-4 h-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

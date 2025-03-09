@@ -8,12 +8,14 @@ const ProductCard = ({
   productInfo,
   isShowFooter = false,
   middleSection,
-  height = '300px'
+  height = '300px',
+  width = '256px'
 }: {
   productInfo: Product;
   isShowFooter?: boolean;
   middleSection?: React.ReactNode;
   height?: string;
+  width?: string;
 }) => {
   const [isShow, setIsShow] = useState(false);
   const navigate = useNavigate();
@@ -23,16 +25,17 @@ const ProductCard = ({
       <div
         onMouseEnter={() => setIsShow(true)}
         onMouseLeave={() => setIsShow(false)}
-        className={`relative w-64 !min-h-[${height}] !h-[${height}] bg-white border border-gray-200 rounded-sm shadow-md overflow-hidden group`
+        style={{width, height}}
+        className={`relative  bg-white border border-gray-200 rounded-sm shadow-md overflow-hidden group`
 }      >
         <img
-          className="w-full h-full overflow-hidden object-contain p-6 transition-transform duration-300 group-hover:scale-105"
+          className={`w-full h-full overflow-hidden object-contain transition-transform duration-300 group-hover:scale-105`}
           src={productInfo.image}
-          alt="product image"
+          alt="product"
         />
 
         {middleSection ? (
-          <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-100 group-hover:!opacity-100">
+          <div className="absolute inset-0 flex items-center justify-center gap-3 bg-transparent group-hover:!opacity-100 hover:bg-black hover:bg-opacity-30">
             {middleSection}
           </div>
         ) : (
