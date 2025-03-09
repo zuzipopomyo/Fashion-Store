@@ -6,6 +6,7 @@ import AddRemoveButtons from "../components/AddRemoveButtons";
 import CustomerReview from "../components/CustomerReview";
 import useCartStore from "../store/useCartStore";
 import { Product } from "./Home";
+import { IoHome, IoLocationSharp } from "react-icons/io5";
 
 const ProductDetail = () => {
   const { id: productId } = useParams();
@@ -145,14 +146,16 @@ const ProductDetail = () => {
       </div>
 
       {/* quantity */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between w-full">
         <span className="font-semibold">Quantity</span>
-        <AddRemoveButtons
-          onPlus={() => setQuantity(Math.min(20, quantity + 1))}
-          onMinus={() => setQuantity(Math.max(1, quantity - 1))}
-          quantity={quantity}
-          hideDelete
-        />
+        <div>
+          <AddRemoveButtons
+            onPlus={() => setQuantity(Math.min(20, quantity + 1))}
+            onMinus={() => setQuantity(Math.max(1, quantity - 1))}
+            quantity={quantity}
+            hideDelete
+          />
+        </div>
       </div>
 
       <div className="border p-3 my-8 bg-gray-100">
@@ -178,13 +181,17 @@ const ProductDetail = () => {
       {/* find in store */}
       <div className="flex gap-10 items-center">
         <div className="bg-purple-200 w-full h-40 p-4">
-          <h6 className="mb-2 font-semibold">Find In Store</h6>
+          <h6 className="mb-2 font-semibold flex gap-3 items-center">
+            <IoLocationSharp className="text-pink-600" /> Find In Store
+          </h6>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, ea.
           </p>
         </div>
         <div className="bg-purple-200 w-full h-40 p-4">
-          <h6 className="mb-2 font-semibold">Deliver To Home</h6>
+          <h6 className="mb-2 font-semibold flex gap-3 items-center">
+            <IoHome className="text-pink-600" /> Deliver To Home
+          </h6>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, ea.
           </p>
@@ -194,13 +201,13 @@ const ProductDetail = () => {
   );
 
   return (
-    <div className="flex flex-col justify-center items-center"> 
+    <div className="flex flex-col justify-center items-center">
       <div className="flex gap-24 mx-24 !pb-0 pt-10 border px-[50px]">
         <ImgSection />
-        <InfoSection/>
+        <InfoSection />
       </div>
 
-      <CustomerReview />
+      <CustomerReview product={productDetail!} />
     </div>
   );
 };

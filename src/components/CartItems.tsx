@@ -9,7 +9,7 @@ export const CartItems = () => {
   const navigate = useNavigate();
 
   return addedProducts.length ? (
-    <div className="flex flex-col gap-5 h-full overflow-auto">
+    <div className="flex flex-col flex-[8] gap-5 h-full overflow-auto">
       {addedProducts.map((product) => (
         <div className="flex gap-2 items-center">
           <ProductCard

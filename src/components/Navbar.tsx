@@ -2,9 +2,14 @@ import { FaUser, FaSearch, FaShoppingCart } from "react-icons/fa";
 import useCartStore from "../store/useCartStore";
 import IconButton from "./IconButton";
 import CartDrawer from "./CartDrawer";
+import useProductStore from "../store/useProductStore";
+import { IoStorefrontSharp } from "react-icons/io5";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const { addedProducts, showCartDrawer, setShowCartDrawer } = useCartStore();
+  const { categorizedProducts } = useProductStore();
+  const {pathname} = useLocation()  
 
   return (
     <div className="relative mb-[74px]">
@@ -14,8 +19,8 @@ const Navbar = () => {
             href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
-            <span className="self-center text-2xl font-semibold whitespace-nowrap ">
-              Fashion Store
+            <span className="flex gap-3 items-center text-2xl font-semibold whitespace-nowrap ">
+            <IoStorefrontSharp />  <span> Fashion Store</span>
             </span>
           </a>
           <div className="flex items-center justify-between gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -42,20 +47,18 @@ const Navbar = () => {
           >
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
               {[
-                { name: "New", link: "new" },
-                { name: "Top", link: "top" },
-                { name: "Kids", link: "kids" },
-                { name: "bottom", link: "bottom" },
-                { name: "Accessories", link: "accessories" },
-                { name: "Collections", link: "collections" },
-                { name: "Sale", link: "sale" },
+                { name: "Home", link: "/" },
+                ...Object.keys(categorizedProducts).map((category) => ({
+                  name: category,
+                  link: `/products/${category}`,
+                })),
+                { name: "About", link: "/aboutUs" },
               ].map((item, index) => (
                 <li>
                   <a
-                    // href={item.link}
-                    href="#"
+                    href={item.link}
                     key={index}
-                    className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
+                    className={`capitalize block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 ${pathname.includes(item.link) && 'text-blue-700'}`}
                   >
                     {item.name}
                   </a>

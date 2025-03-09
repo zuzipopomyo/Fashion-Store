@@ -1,66 +1,33 @@
-
 import avatar from "../assets/images/avatar.png";
-import cards from '../assets/images/Frame 126.png'
+import cards from "../assets/images/Frame 126.png";
+import { Product } from "../pages/Home";
+import useProductStore from "../store/useProductStore";
+import ProductCard from "./ProductCard";
 
-const CustomerReview = () => {
-  const reviews = [
-    {
-      id: 1,
-      name: "Jane Doe",
-      rating: 5,
-      avatar: "https://via.placeholder.com/50",
-      date: "30 July 2020",
-    },
-    {
-      id: 2,
-      name: "John Doe",
-      rating: 2,
-      avatar: "https://via.placeholder.com/50",
-      date: "30 July 2020",
-    },
-    {
-      id: 3,
-      name: "Alice Smith",
-      rating: 3,
-      avatar: "https://via.placeholder.com/50",
-      date: "30 July 2020",
-    },
-    {
-      id: 4,
-      name: "Bob Johnson",
-      rating: 4,
-      avatar: "https://via.placeholder.com/50",
-      date: "30 July 2020",
-    },
-    {
-      id: 5,
-      name: "Emily Brown",
-      rating: 2,
-      avatar: "https://via.placeholder.com/50",
-      date: "30 July 2020",
-    },
+function getFakeReview() {
+  const names = [
+    "Jane Doe",
+    "John Smith",
+    "Alice Johnson",
+    "Bob Brown",
+    "Emma Wilson",
   ];
+  const randomName = names[Math.floor(Math.random() * names.length)];
 
-  const suggestedProducts = [
-    {
-      id: 1,
-      title: "Wireless Headphones",
-      price: "$99",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 2,
-      title: "Smartphone",
-      price: "$799",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 3,
-      title: "Gaming Mouse",
-      price: "$49",
-      image: "https://via.placeholder.com/150",
-    },
-  ];
+  return {
+    id: Math.floor(Math.random() * 1000),
+    name: randomName,
+    rating: Math.floor(Math.random() * 5) + 1,
+    avatar: `https://via.placeholder.com/50?text=UserX`,
+    date: "11/11/2000",
+  };
+}
+
+const CustomerReview = ({ product }: { product: Product }) => {
+  const { allProducts } = useProductStore();
+  const reviews = Array.from({ length: Math.random() * 10 + 1 }, () =>
+    getFakeReview()
+  );
 
   return (
     <div className="container mx-10 px-10 my-40">
@@ -98,20 +65,21 @@ const CustomerReview = () => {
             </div>
           ))}
 
-          <button className="w-full text-center bg-purple-100 py-2 rounded-md mt-4">
+          {/* <button className="w-full text-center bg-purple-100 py-2 rounded-md mt-4">
             Load more...
-          </button>
+          </button> */}
         </div>
 
         {/* overall Rating  */}
-        <div className="border p-4 rounded-lg shadow-md w-[500px]">
+        <div className="border p-4 rounded-lg shadow-md w-[500px] max-h-[360px]">
           <h2 className="text-2xl font-thin mb-4">Overall Rating</h2>
           <div className="mb-4 flex items-center gap-4">
             <div className="text-5xl font-bold">
-              <span className="text-yellow-500">★</span>4.5
+              <span className="text-yellow-500">★</span>
+              {product?.rating?.rate}
             </div>
             <div>
-              <h3>30 out of 32 (90%)</h3>
+              <h3>30 out of {product?.rating?.count}</h3>
               <h4>Customer Recommended this product</h4>
             </div>
           </div>
@@ -131,8 +99,20 @@ const CustomerReview = () => {
       </div>
 
       {/* You Might Also Like Section */}
-      <div className="mt-20">
-        <img src={cards} alt="" />
+      <div className="m-10">
+        <h3 className="text-center font-bold text-3xl mb-10">
+          You might also like
+        </h3>
+        <div className="flex gap-3 items-center flex-wrap justify-center">
+          {allProducts &&
+            allProducts.slice(4, 8).map((product) => {
+              return (
+                <>
+                  <ProductCard productInfo={product} />
+                </>
+              );
+            })}
+        </div>
       </div>
     </div>
   );

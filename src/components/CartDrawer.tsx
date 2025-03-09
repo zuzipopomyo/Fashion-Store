@@ -1,22 +1,29 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import useCartStore from "../store/useCartStore";
 import { CartItems } from "./CartItems";
 import IconButton from "./IconButton";
+import { useEffect } from "react";
 export interface IAddedOrder {
   productId: number;
   quantity: number;
 }
 
 const CartDrawer = ({ onClose }: { onClose: () => void }) => {
-  const { addedProducts } = useCartStore();
+  const { addedProducts, setShowCartDrawer, showCartDrawer } = useCartStore();
+  const location = useLocation();
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   console.log('called')
+  //   showCartDrawer && setShowCartDrawer(false);
+  // }, [location]);
 
   return (
     <div
-      className="fixed top-0 right-[720px] z-40 h-screen p-4 overflow-hidden transition-transform translate-x-full bg-gray-100 w-[720px] shadow-gray-400 shadow-2xl"
+      className="fixed flex flex-col justify-between top-0 right-[720px] z-40 h-screen p-4 overflow-hidden transition-transform translate-x-full bg-gray-100 w-[720px] shadow-gray-400 shadow-2xl"
       aria-labelledby="drawer-right-label"
     >
-      <div className="flex justify-between items-center">
+      <div className="flex flex-[1] justify-between items-center">
         <h5
           id="drawer-right-label"
           className="inline-flex text-2xl items-center mb-4 font-bold text-black "
@@ -47,14 +54,14 @@ const CartDrawer = ({ onClose }: { onClose: () => void }) => {
 
       <CartItems />
 
-      <div className="relative">
+      <div>
         <button
           onClick={() => {
             navigate("/purchaseOrder");
             onClose();
           }}
           type="button"
-          className="absolute bottom-[34px] text-white w-full bg-purple-600 hover:bg-purple-800 px-5 py-4 flex justify-center items-center"
+          className="text-white w-full bg-purple-600 hover:bg-purple-800 px-5 py-4 flex justify-center items-center"
         >
           <svg
             className="w-3.5 h-3.5 me-2"
@@ -67,7 +74,9 @@ const CartDrawer = ({ onClose }: { onClose: () => void }) => {
           </svg>
           <span>
             Checkout - $
-            {addedProducts.reduce((a, b) => a + (b.price * (b?.quantity || 1)), 0).toFixed(2)}
+            {addedProducts
+              .reduce((a, b) => a + b.price * (b?.quantity || 1), 0)
+              .toFixed(2)}
           </span>
         </button>
       </div>

@@ -15,18 +15,30 @@ const ProductCategory = () => {
   const { name: categoryName } = useParams();
   const { categorizedProducts, allProducts } = useProductStore();
   const [products, setProducts] = useState<Product[]>(allProducts);
-  const [filters, setFilters] = useState<{ category: string[]; price: string }>(
-    { category: [], price: "" }
-  );
+  const [filters, setFilters] = useState<{
+    category: string[];
+    startPrice: string;
+    endPrice: string;
+  }>({ category: [], startPrice: "", endPrice: "" });
 
   useEffect(() => {
-    const filteredProducts = filters.category.length
-      ? allProducts.filter((product) =>
-          filters.category.includes(product.category)
-        )
-      : allProducts;
+    let filteredProducts = [...allProducts];
+    //TODO :: Fix the filter functionality
+    if (filters.category.length) {
+      filteredProducts = filteredProducts.filter((product) =>
+        filters.category.includes(product.category)
+      );
+    } else if (!!filters.startPrice && !!filters.endPrice) {
+      filteredProducts = filteredProducts.filter(
+        (product) =>
+          product.price >= +filters.startPrice &&
+          product.price <= +filters.endPrice
+      );
+    } else {
+      filteredProducts = allProducts;
+    }
     setProducts(filteredProducts);
-  }, [filters.category, allProducts]);
+  }, [filters.category, filters.endPrice, filters.startPrice, allProducts]);
 
   useEffect(() => {
     categoryName && setFilters({ ...filters, category: [categoryName] });
@@ -37,13 +49,31 @@ const ProductCategory = () => {
       <div style={{ flex: 3 }} className="h-full w-full text-lg">
         <h1 className="text-xl font-bold pb-3 ">Filter</h1>
         {/* Selected Filters */}
-        <div className="flex gap-2 mb-4 border-b pb-7">
-          <span className="px-2 py-1 bg-gray-200 text-sm rounded flex items-center gap-1 radius-5">
-            Men <button>×</button>
-          </span>
-          <span className="px-2 py-1 bg-gray-200 text-sm rounded flex items-center gap-1">
-            Women <button>×</button>
-          </span>
+        <div className="flex justify-between">
+          <div className="flex gap-2 mb-4 border-b pb-7 flex-wrap">
+            {filters.category.map((c) => (
+              <span
+                key={c}
+                className="px-2 py-1 bg-gray-200 text-sm rounded flex items-center gap-1 radius-5"
+              >
+                {c} <button>×</button>
+              </span>
+            ))}
+            {filters.startPrice && filters.endPrice && (
+              <span className="px-2 py-1 bg-gray-200 text-sm rounded flex items-center gap-1 radius-5">
+                ${filters.startPrice} - ${filters.endPrice} <button>×</button>
+              </span>
+            )}
+          </div>
+
+          <button
+            onClick={() =>
+              setFilters({ category: [], startPrice: "", endPrice: "" })
+            }
+            className="border-0 p-0 underline text-purple-600"
+          >
+            Reset All
+          </button>
         </div>
         {/* {deperment} */}
         <div className="mb-4 border-b pb-7 ">
@@ -131,11 +161,19 @@ const ProductCategory = () => {
           <h3 className="font-semibold mb-2">Price</h3>
           <div className="flex gap-2">
             <input
+              onChange={(e) =>
+                setFilters({ ...filters, startPrice: e.target.value })
+              }
+              value={filters.startPrice}
               type="number"
               className="border p-2 w-full rounded"
               placeholder="$10.00"
             />
             <input
+              onChange={(e) =>
+                setFilters({ ...filters, endPrice: e.target.value })
+              }
+              value={filters.endPrice}
               type="number"
               className="border p-2 w-full rounded"
               placeholder="$350.00"
@@ -153,9 +191,7 @@ const ProductCategory = () => {
     <div className="h-full w-full my-6">
       <div className="relative">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white">
-          <h1 className="font-bold text-4xl mb-3 capitalize">
-            New Arrival
-          </h1>
+          <h1 className="font-bold text-4xl mb-3 capitalize">New Arrival</h1>
           <p>
             Category Description: Lorem ipsum dolor sit amet consectetur
             adipisicing elit. Dolorum excepturi aut earum ad laudantium eveniet
