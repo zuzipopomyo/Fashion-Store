@@ -1,6 +1,6 @@
 import useCartStore from "../store/useCartStore";
 
-const GiftCard = () => {
+const GiftCard = ({ shippingPrice }: { shippingPrice: string }) => {
   const { addedProducts } = useCartStore();
   const total = addedProducts
     .reduce((acc, item) => acc + item.price * item.quantity, 0)
@@ -31,13 +31,15 @@ const GiftCard = () => {
         </div>
         <div className="flex justify-between">
           <span>Shipping</span>
-          <span className="font-semibold">$0.00</span>
+          <span className="font-semibold">${shippingPrice}</span>
         </div>
       </div>
       <hr className="my-4" />
       <div className="flex justify-between text-lg font-bold">
         <span>Total</span>
-        <span>${total}</span>
+        <span>
+          ${(parseFloat(total) + parseFloat(shippingPrice)).toFixed(2)}
+        </span>
       </div>
     </div>
   );

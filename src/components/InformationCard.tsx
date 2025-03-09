@@ -1,10 +1,26 @@
 import { useForm } from "react-hook-form";
 
-const InformationCard = () => {
-  const { register, handleSubmit } = useForm();
+const InformationCard = ({
+  onReturn,
+  onContinue,
+}: {
+  onReturn: () => void;
+  onContinue: () => void;
+}) => {
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      address: "",
+      city: "",
+      postalCode: "",
+      phone: "",
+    },
+  });
 
   const onSubmit = (data: any) => {
     console.log(data);
+    onContinue();
   };
 
   return (
@@ -26,11 +42,13 @@ const InformationCard = () => {
       </div>
       <div className="flex space-x-4 mb-4">
         <input
-          {...register("firstName")}
+          {...register("firstName", { required: true })}
           type="text"
+          required
           placeholder="First name"
           className="w-1/2 p-2 border border-gray-300 bg-transparent"
         />
+
         <input
           {...register("lastName")}
           type="text"
@@ -39,8 +57,9 @@ const InformationCard = () => {
         />
       </div>
       <input
-        {...register("address")}
+        {...register("address", { required: true })}
         type="text"
+        required
         placeholder="Address"
         className="w-full p-2 border border-gray-300 bg-transparent mb-4"
       />
@@ -56,8 +75,9 @@ const InformationCard = () => {
         </select>
       </div>
       <input
-        {...register("postalCode")}
+        {...register("postalCode", { required: true })}
         type="text"
+        required
         placeholder="Postal Code"
         className="w-full p-2 border border-gray-300 bg-transparent mb-4"
       />
@@ -67,6 +87,19 @@ const InformationCard = () => {
         placeholder="Phone"
         className="w-full p-2 border border-gray-300 bg-transparent mb-4"
       />
+
+      <div className="flex justify-between gap-9 items-center mb-4">
+        <button
+          onClick={onReturn}
+          type="button"
+          className="p-2 text-black border border-gray-300"
+        >
+          Return
+        </button>
+        <button type="submit" className="bg-purple-600 text-white p-2">
+          Continue
+        </button>
+      </div>
     </form>
   );
 };
