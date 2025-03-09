@@ -63,10 +63,13 @@ const Home = () => {
   return (
     <main className="flex flex-col gap-10 items-center">
       <div>
+      <div className="relative">
         <img className="w-screen" src={TopBannerImg} />
       </div>
       <div>
         <img className="w-screen" src={MiddleBanner} />
+      </div>
+      <button className="absolute top-[29rem] left-[15rem] bg-purple-600 text-white rounded-sm px-12 py-3 text-xl">Shop Now</button>
       </div>
 
       <div>

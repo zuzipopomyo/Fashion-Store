@@ -3,7 +3,6 @@ import CategoryHeadImg from "../assets/images/category-head.png";
 import useProductStore from "../store/useProductStore";
 import { Product } from "./Home";
 import ProductCard from "../components/ProductCard";
-import useCartStore from "../store/useCartStore";
 const departments = [
   { name: "Men", count: 230 },
   { name: "Kids", count: 45 },

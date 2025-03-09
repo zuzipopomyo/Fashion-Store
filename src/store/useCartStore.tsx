@@ -10,6 +10,7 @@ interface CartStore {
   showCartDrawer: boolean;
   setShowCartDrawer: (show: boolean) => void;
   updateQuantity: (productId: number, newQuantity: number) => void;
+  clearCart: () => void;
 }
 
 const useCartStore = create<CartStore>()(
@@ -64,19 +65,19 @@ const useCartStore = create<CartStore>()(
           };
         }),
 
-        updateQuantity: (productId: number, newQuantity: number) =>
-          set((state) => {
-            const updatedProducts = state.addedProducts.map((product) =>
-              product.id === productId
-                ? { ...product, quantity: newQuantity }
-                : product
-            );
-  
-            return {
-              addedProducts: updatedProducts,
-            };
-          }),
+      updateQuantity: (productId: number, newQuantity: number) =>
+        set((state) => {
+          const updatedProducts = state.addedProducts.map((product) =>
+            product.id === productId
+              ? { ...product, quantity: newQuantity }
+              : product
+          );
 
+          return {
+            addedProducts: updatedProducts,
+          };
+        }),
+        clearCart:() =>set({addedProducts:[]})
     }),
     { name: "cart-store" }
   )

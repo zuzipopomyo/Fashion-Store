@@ -6,12 +6,20 @@ import PaymentCard from "../components/PaymentCard";
 import ShippingCard from "../components/ShippingCard";
 import Stepper from "../components/Stepper";
 import OrderItemsCard from "../components/OrderItemsCard";
+import { useNavigate } from "react-router";
 
 const PurchaseOrder = () => {
   const [step, setStep] = useState(1);
 
-  const onContinue = () => step < 4 && setStep(step + 1);
+  const onContinue = () => {
+    if (step < 4) {
+      setStep(step + 1);
+    } else {
+      navigate("/purchase-completion");
+    }
+  };
   const onReturn = () => step > 1 && setStep(step - 1);
+  const navigate = useNavigate()
 
   return (
     <div className="px-[120px] py-10">
@@ -37,6 +45,7 @@ const PurchaseOrder = () => {
               onClick={onContinue}
               type="submit"
               className="bg-purple-600 text-white p-2"
+              
             >
               Continue
             </button>
