@@ -31,7 +31,7 @@ const Home = () => {
   } = useProductStore();
   const [prev, setPrev] = useState(0);
   const [next, setNext] = useState(4);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function groupProductsByCategory(products: Product[]) {
     return products.reduce((acc: any, product) => {
@@ -63,17 +63,25 @@ const Home = () => {
   return (
     <main className="flex flex-col gap-10 items-center">
       <div>
-      <div className="relative">
-        <img className="w-screen" src={TopBannerImg} />
-      </div>
-      <div>
-        <img className="w-screen" src={MiddleBanner} />
-      </div>
-      <button className="absolute top-[29rem] left-[15rem] bg-purple-600 text-white rounded-sm px-12 py-3 text-xl">Shop Now</button>
+        <div className="relative">
+          <img className="w-screen" src={TopBannerImg} />
+        </div>
+        <div>
+          <img className="w-screen" src={MiddleBanner} />
+        </div>
+        <button
+          onClick={() => navigate("products")}
+          className="absolute top-[29rem] left-[15rem] bg-purple-600 text-white rounded-sm px-12 py-3 text-xl"
+        >
+          Shop Now
+        </button>
       </div>
 
       <div>
-        <h3 className="text-center font-semibold text-2xl mb-10 pt-6"> New Arrivals</h3>
+        <h3 className="text-center font-semibold text-2xl mb-10 pt-6">
+          {" "}
+          New Arrivals
+        </h3>
 
         <div
           id="controls-carousel"
@@ -85,12 +93,12 @@ const Home = () => {
               <div className="flex gap-3 items-center justify-center">
                 {allProducts &&
                   allProducts.slice(prev, next).map((product) => {
-                  return (
-                    <>
-                      <ProductCard isShowFooter productInfo={product} />
-                    </>
-                  );
-                })}
+                    return (
+                      <>
+                        <ProductCard isShowFooter productInfo={product} />
+                      </>
+                    );
+                  })}
               </div>
             </div>
           </div>
@@ -172,7 +180,7 @@ const Home = () => {
                         {category}
                       </span>
                       <button
-                        onClick={()=>navigate('product-category/'+ category)}
+                        onClick={() => navigate("products/" + category)}
                         type="button"
                         className="text-black bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2"
                       >
@@ -198,12 +206,12 @@ const Home = () => {
         <div className="flex gap-3 items-center flex-wrap justify-center">
           {allProducts &&
             allProducts.slice(0, 4).map((product) => {
-            return (
-              <>
-                <ProductCard productInfo={product} isShowFooter />
-              </>
-            );
-          })}
+              return (
+                <>
+                  <ProductCard productInfo={product} isShowFooter />
+                </>
+              );
+            })}
         </div>
       </div>
 
@@ -212,13 +220,13 @@ const Home = () => {
         <div className="flex items-center flex-wrap justify-center">
           {allProducts &&
             allProducts.slice(0, 4).map((product) => {
-            return (
-              <ProductCard
-                productInfo={product}
-                middleSection={<span className="font-bold">Brand</span>}
-              />
-            );
-          })}
+              return (
+                <ProductCard
+                  productInfo={product}
+                  middleSection={<span className="font-bold">Brand</span>}
+                />
+              );
+            })}
         </div>
       </div>
     </main>
