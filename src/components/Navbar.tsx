@@ -19,18 +19,22 @@ const Navbar = () => {
             </span>
           </a>
           <div className="flex items-center justify-between gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <FaSearch />
-            <IconButton 
-              onClick={() => setShowCartDrawer(true)}
-              icon={
-                <>
-                  <FaShoppingCart/>
-                  {addedProducts.length}
-                </>
-              }
-            />
+            <FaSearch style={{ fontSize: "20px" }} />
+            <div className="relative">
+              <IconButton
+                onClick={() => setShowCartDrawer(true)}
+                icon={
+                  <>
+                    <FaShoppingCart style={{ fontSize: "20px" }} />
+                    <span className="absolute h-5 w-5 top-0 right-0 rounded-full bg-red-600 text-white">
+                      {addedProducts.length}
+                    </span>
+                  </>
+                }
+              />
+            </div>
 
-            <FaUser />
+            <FaUser style={{ fontSize: "20px" }} />
           </div>
           <div
             className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"

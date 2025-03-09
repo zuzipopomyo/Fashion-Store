@@ -33,7 +33,7 @@ const ShippingCard = () => {
   ];
 
   return (
-    <div className="w-full max-w-lg p-6">
+    <div className="w-full">
       <h2 className="text-lg font-semibold mb-4">Shipping Method</h2>
       {shippingMethods.map((method) => (
         <div
@@ -41,19 +41,13 @@ const ShippingCard = () => {
           className="p-4 border rounded-md flex justify-between items-center mb-2"
         >
           <div>
-            <input type="checkbox" className="mr-2" />
+            <input type="radio" name="shipping" className="mr-2" />
             <p className="font-medium inline">{method.name}</p>
             <p className="text-sm text-gray-600">{method.description}</p>
           </div>
           <span className="font-bold">{method.price}</span>
         </div>
       ))}
-      <div className="flex justify-between gap-9 items-center mt-4">
-        <button type="button" className="p-1 text-black border border-gray-300">
-          Return
-        </button>
-        <button className="bg-purple-600 text-white p-2">Continue</button>
-      </div>
     </div>
   );
 };

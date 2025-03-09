@@ -3,7 +3,7 @@ import { FaCcVisa } from "react-icons/fa";
 import { FaCcMastercard } from "react-icons/fa";
 const PaymentCard = () => {
   return (
-    <div className="w-[500px] p-6 border rounded-md">
+    <div className="w-full">
       <h2 className="text-lg font-semibold mb-4">Payment Method</h2>
       <div className="p-4 border rounded-md text-white">
         <div className="flex justify-between items-center mb-4">
@@ -53,12 +53,6 @@ const PaymentCard = () => {
             className="p-2 border border-gray-300 bg-transparent w-1/3 text-white"
           />
         </div>
-      </div>
-      <div className="flex justify-between items-center mt-4">
-        <button type="button" className="p-2 text-black border border-gray-300">
-          Return
-        </button>
-        <button className="bg-purple-600 text-white p-2">Continue</button>
       </div>
       <div className="flex items-center space-x-2 justify-between pt-5">
         <div>

@@ -9,7 +9,7 @@ const IconButton = ({
     <button
       onClick={onClick}
       type="button"
-      className="text-black border bg-white focus:ring-4 focus:outline-none focus:ring-white font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center "
+      className="text-black bg-white focus:ring-4 focus:outline-none focus:ring-white font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center "
     >
       {icon}
     </button>

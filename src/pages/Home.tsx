@@ -162,6 +162,7 @@ const Home = () => {
               <>
                 <ProductCard
                   productInfo={(product as any)[0] as any}
+                  // height="400px"
                   middleSection={
                     <div className="flex flex-col gap-2 items-center justify-center">
                       <span className="text-[22px] text-red-700 font-bold capitalize">

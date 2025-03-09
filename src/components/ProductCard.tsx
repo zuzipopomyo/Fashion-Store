@@ -8,23 +8,25 @@ const ProductCard = ({
   productInfo,
   isShowFooter = false,
   middleSection,
+  height = '300px'
 }: {
   productInfo: Product;
   isShowFooter?: boolean;
   middleSection?: React.ReactNode;
+  height?: string;
 }) => {
   const [isShow, setIsShow] = useState(false);
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center gap-3 w-45 h-[400px]">
+    <div className="flex flex-col items-center gap-3 w-45">
       <div
         onMouseEnter={() => setIsShow(true)}
         onMouseLeave={() => setIsShow(false)}
-        className="relative w-64 h-[300px] bg-white border border-gray-200 rounded-sm shadow-md overflow-hidden group"
-      >
+        className={`relative w-64 !min-h-[${height}] !h-[${height}] bg-white border border-gray-200 rounded-sm shadow-md overflow-hidden group`
+}      >
         <img
-          className="w-full h-full object-cover p-6 transition-transform duration-300 group-hover:scale-105"
+          className="w-full h-full overflow-hidden object-contain p-6 transition-transform duration-300 group-hover:scale-105"
           src={productInfo.image}
           alt="product image"
         />

@@ -8,7 +8,7 @@ const InformationCard = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-lg p-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       <div className="flex item-center justify-between pb-8">
         <div className="font-semibold text-lg">Contract Information </div>
         <div className="font-thin">
@@ -67,14 +67,6 @@ const InformationCard = () => {
         placeholder="Phone"
         className="w-full p-2 border border-gray-300 bg-transparent mb-4"
       />
-      <div className="flex justify-between gap-9 items-center mb-4">
-        <button type="button" className="p-1 text-black border border-gray-300">
-          Return
-        </button>
-        <button type="submit" className="bg-purple-600 text-white p-2">
-          Continue
-        </button>
-      </div>
     </form>
   );
 };

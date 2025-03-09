@@ -1,6 +1,13 @@
+import useCartStore from "../store/useCartStore";
+
 const GiftCard = () => {
+  const { addedProducts } = useCartStore();
+  const total = addedProducts
+    .reduce((acc, item) => acc + item.price * item.quantity, 0)
+    .toFixed(2);
+
   return (
-    <div className="w-[450px] mx-auto bg-gray-100 p-6">
+    <div className="w-full bg-gray-100 p-6">
       <h2 className="text-lg font-semibold mb-2">Gift card or discount code</h2>
       <div className="flex">
         <input
@@ -16,7 +23,7 @@ const GiftCard = () => {
       <div className="space-y-2">
         <div className="flex justify-between">
           <span>Subtotal</span>
-          <span className="font-semibold">$49.40</span>
+          <span className="font-semibold">${total}</span>
         </div>
         <div className="flex justify-between">
           <span>Tax</span>
@@ -30,7 +37,7 @@ const GiftCard = () => {
       <hr className="my-4" />
       <div className="flex justify-between text-lg font-bold">
         <span>Total</span>
-        <span>$62.40</span>
+        <span>${total}</span>
       </div>
     </div>
   );

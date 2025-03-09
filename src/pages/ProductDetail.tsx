@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import CustomerReview from "../components/CustomerReview";
 import axios from "axios";
-import { Product } from "./Home";
+import { useEffect, useState } from "react";
+import { FaRegHeart } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import IconButton from "../components/IconButton";
-import { FaMinus, FaPlus, FaRegHeart } from "react-icons/fa";
+import AddRemoveButtons from "../components/AddRemoveButtons";
+import CustomerReview from "../components/CustomerReview";
 import useCartStore from "../store/useCartStore";
+import { Product } from "./Home";
 
 const ProductDetail = () => {
   const { id: productId } = useParams();
@@ -34,7 +34,6 @@ const ProductDetail = () => {
       updateQuantity(+productId!, quantity);
 
     !isProductAlreadyAdded && addToCart(productDetail!, quantity);
-  
     setShowCartDrawer(true);
   };
 
@@ -148,17 +147,12 @@ const ProductDetail = () => {
       {/* quantity */}
       <div className="flex items-center justify-between">
         <span className="font-semibold">Quantity</span>
-        <div className="flex gap-2 items-center">
-          <IconButton
-            onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            icon={<FaMinus />}
-          />
-          <span>{quantity}</span>
-          <IconButton
-            onClick={() => setQuantity(Math.min(10, quantity + 1))}
-            icon={<FaPlus />}
-          />
-        </div>
+        <AddRemoveButtons
+          onPlus={() => setQuantity(Math.min(20, quantity + 1))}
+          onMinus={() => setQuantity(Math.max(1, quantity - 1))}
+          quantity={quantity}
+          hideDelete
+        />
       </div>
 
       <div className="border p-3 my-8 bg-gray-100">
