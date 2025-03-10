@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import AppWrapper from "./components/AppWrapper";
 import ProductDetail from "./pages/ProductDetail";
@@ -9,7 +9,7 @@ import AllProducts from "./pages/AllProducts";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<AppWrapper />}>
           <Route index element={<Home />} />
@@ -23,7 +23,7 @@ function App() {
 
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

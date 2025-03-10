@@ -4,7 +4,7 @@ import IconButton from "./IconButton";
 import CartDrawer from "./CartDrawer";
 import useProductStore from "../store/useProductStore";
 import { IoStorefrontSharp as I1 } from "react-icons/io5";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const IoStorefrontSharp = I1 as any;
 const FaUser = I2 as any;
@@ -20,14 +20,14 @@ const Navbar = () => {
     <div className="relative mb-[74px]">
       <nav className="bg-white  fixed w-full z-20 top-0 start-0 border-b border-gray-200 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <span className="flex gap-3 items-center text-2xl font-semibold whitespace-nowrap ">
               <IoStorefrontSharp /> <span> Fashion Store</span>
             </span>
-          </a>
+          </Link>
           <div className="flex items-center justify-between gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <FaSearch style={{ fontSize: "20px" }} />
             <div className="relative">
@@ -61,15 +61,15 @@ const Navbar = () => {
                 { name: "About", link: "/aboutUs" },
               ].map((item, index) => (
                 <li>
-                  <a
-                    href={item.link}
+                  <Link
+                    to={item.link}
                     key={index}
                     className={`capitalize block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 ${
                       decodeURIComponent(pathname).includes(item.link) && "!text-blue-700"
                     }`}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
