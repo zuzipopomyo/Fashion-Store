@@ -1,5 +1,4 @@
 import avatar from "../assets/images/avatar.png";
-import cards from "../assets/images/Frame 126.png";
 import { Product } from "../pages/Home";
 import useProductStore from "../store/useProductStore";
 import ProductCard from "./ProductCard";
@@ -108,7 +107,7 @@ const CustomerReview = ({ product }: { product: Product }) => {
             allProducts.slice(4, 8).map((product) => {
               return (
                 <>
-                  <ProductCard productInfo={product} />
+                  <ProductCard productInfo={product} isShowFooter />
                 </>
               );
             })}

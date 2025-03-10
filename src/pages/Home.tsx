@@ -4,13 +4,18 @@ import MiddleBanner2 from "../assets/images/Frame 34.jpeg";
 import SaleImage from "../assets/images/50off.png";
 import GirlImg from "../assets/images/girl.png";
 import ProductCard from "../components/ProductCard";
-import { FaArrowRight, FaSearch } from "react-icons/fa";
+import { FaArrowRight as I1, FaSearch as I2 } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useProductStore from "../store/useProductStore";
 import { useNavigate } from "react-router-dom";
 import IconButton from "../components/IconButton";
-import { RiArrowRightSLine, RiArrowLeftSLine } from "react-icons/ri";
+import { RiArrowRightSLine as I3, RiArrowLeftSLine as I4 } from "react-icons/ri";
+
+const FaArrowRight = I1 as any;
+const FaSearch = I2 as any;
+const RiArrowRightSLine = I3 as any;
+const RiArrowLeftSLine = I4 as any;
 
 export interface Product {
   id: number;

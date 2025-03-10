@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
-import { FaPaypal } from "react-icons/fa";
-import { FaCcVisa } from "react-icons/fa";
-import { FaCcMastercard } from "react-icons/fa";
+import { FaPaypal as I1, FaCcMastercard as I2, FaCcVisa as I3} from "react-icons/fa";
+
+const FaPaypal = I1 as any;
+const FaCcMastercard = I2 as any;
+const FaCcVisa = I3 as any;
 
 const PaymentCard = ({
   onReturn,

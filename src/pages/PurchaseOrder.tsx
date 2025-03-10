@@ -8,17 +8,28 @@ import Stepper from "../components/Stepper";
 import OrderItemsCard from "../components/OrderItemsCard";
 import { useNavigate } from "react-router";
 import useCartStore from "../store/useCartStore";
+import axios from "axios";
 
 const PurchaseOrder = () => {
   const [step, setStep] = useState(1);
   const { addedProducts } = useCartStore();
   const [shippingPrice, setShippingPrice] = useState("0.00");
 
-  const onContinue = () => {
+  const onContinue = async () => {
     if (step < 4) {
       setStep(step + 1);
     } else {
-      navigate("/purchase-completion");
+      try {
+        const cart = {
+          userId: 1,
+          products: addedProducts.map((product) => ({ id: product.id })),
+        };
+        await axios
+          .post("https://fakestoreapi.com/carts", cart)
+          .then((response) => navigate("/purchase-completion"));
+      } catch (error) {
+        alert("Something went wrong please try again later!");
+      }
     }
   };
   const onReturn = () => step > 1 && setStep(step - 1);

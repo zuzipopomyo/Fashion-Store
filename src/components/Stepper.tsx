@@ -1,4 +1,6 @@
-import { FaCheck } from "react-icons/fa";
+import { FaCheck as I1 } from "react-icons/fa";
+
+const FaCheck = I1 as any;
 
 const Stepper = ({ step }: { step: number }) => {
   return (

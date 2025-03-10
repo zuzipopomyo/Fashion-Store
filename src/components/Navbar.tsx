@@ -1,10 +1,15 @@
-import { FaUser, FaSearch, FaShoppingCart } from "react-icons/fa";
+import { FaUser as I2, FaSearch as I3, FaShoppingCart as I4} from "react-icons/fa";
 import useCartStore from "../store/useCartStore";
 import IconButton from "./IconButton";
 import CartDrawer from "./CartDrawer";
 import useProductStore from "../store/useProductStore";
-import { IoStorefrontSharp } from "react-icons/io5";
+import { IoStorefrontSharp as I1 } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
+
+const IoStorefrontSharp = I1 as any;
+const FaUser = I2 as any;
+const FaSearch = I3 as any;
+const FaShoppingCart = I4 as any;
 
 const Navbar = () => {
   const { addedProducts, showCartDrawer, setShowCartDrawer } = useCartStore();

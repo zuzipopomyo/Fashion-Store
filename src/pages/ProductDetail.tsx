@@ -1,12 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart as I1 } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import AddRemoveButtons from "../components/AddRemoveButtons";
 import CustomerReview from "../components/CustomerReview";
 import useCartStore from "../store/useCartStore";
 import { Product } from "./Home";
-import { IoHome, IoLocationSharp } from "react-icons/io5";
+import { IoHome as I2, IoLocationSharp as I3}from "react-icons/io5";
+
+const FaRegHeart = I1 as any;
+const IoHome = I2 as any;
+const IoLocationSharp = I3 as any;
 
 const ProductDetail = () => {
   const { id: productId } = useParams();

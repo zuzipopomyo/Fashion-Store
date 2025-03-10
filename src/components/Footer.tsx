@@ -1,4 +1,5 @@
-import { IoSend } from "react-icons/io5";
+import { IoSend as I1 } from "react-icons/io5";
+const IoSend = I1 as any;
 
 const Footer = () => {
   return (

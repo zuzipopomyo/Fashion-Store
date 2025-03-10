@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { FaSearch, FaRegHeart } from "react-icons/fa";
+import { FaSearch as I1, FaRegHeart as I2} from "react-icons/fa";
 import IconButton from "./IconButton";
 import { Product } from "../pages/Home";
 import { useNavigate } from "react-router-dom";
+
+const FaSearch = I1 as any;
+const FaRegHeart = I2 as any;
 
 const ProductCard = ({
   productInfo,
