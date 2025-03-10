@@ -13,7 +13,6 @@ function App() {
       <Routes>
         <Route path="/" element={<AppWrapper />}>
           <Route index element={<Home />} />
-          <Route index path="/home" element={<Home />} />
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:name" element={<AllProducts />} />
           <Route path="/product-detail/:id" element={<ProductDetail />} />
