@@ -1,4 +1,5 @@
-import { FaTrash } from "react-icons/fa";
+import { FaTrash as I1 } from "react-icons/fa";
+const FaTrash = I1 as any;
 
 const AddRemoveButtons = ({
   onPlus,
