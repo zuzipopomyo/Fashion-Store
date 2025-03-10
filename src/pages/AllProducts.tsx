@@ -4,6 +4,7 @@ import useProductStore from "../store/useProductStore";
 import { Product } from "./Home";
 import ProductCard from "../components/ProductCard";
 import { useEffect, useState } from "react";
+
 const departments = [
   { name: "Men", count: 0 },
   { name: "Kids", count: 0 },
@@ -47,7 +48,9 @@ const ProductCategory = () => {
           product.price <= +filters.endPrice
       );
     }
-    navigate("/products");
+    (filters.category.length !== 1 ||
+      (categoryName && !filters.category.includes(categoryName))) &&
+      navigate("/products");
     setProducts(filteredProducts);
   };
 
@@ -59,7 +62,7 @@ const ProductCategory = () => {
   }, [categoryName]);
 
   return (
-    <div className="h-full w-full my-6">
+    <div className="h-full w-full mb-6">
       <div className="relative">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white">
           <h1 className="font-bold text-4xl mb-3 capitalize">New Arrival</h1>
@@ -157,11 +160,9 @@ const FilterSidebar = ({
         <button
           onClick={() => {
             setFilters(initialFilters);
-            setTimeout(() => {
-              onApply(initialFilters);
-            }, 100);
+            onApply(initialFilters);
           }}
-          className="border-0 p-0 underline text-purple-600 w-40"
+          className="border-0 p-0 underline text-purple-600 text-center w-40"
         >
           Reset All
         </button>

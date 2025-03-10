@@ -29,7 +29,7 @@ const CustomerReview = ({ product }: { product: Product }) => {
   );
 
   return (
-    <div className="container mx-10 px-10 my-40">
+    <div className="container mx-10 px-10 my-20">
       <div className="flex justify-between pb-7">
         <h2 className="text-2xl font-semibold">Customer Review</h2>
         <div>Sort By: Nearest</div>
@@ -98,7 +98,7 @@ const CustomerReview = ({ product }: { product: Product }) => {
       </div>
 
       {/* You Might Also Like Section */}
-      <div className="m-10">
+      <div className="m-10 !mt-12">
         <h3 className="text-center font-bold text-3xl mb-10">
           You might also like
         </h3>

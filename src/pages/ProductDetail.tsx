@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { FaRegHeart as I1 } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { FaArrowLeft as I4, FaRegHeart as I1 } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
 import AddRemoveButtons from "../components/AddRemoveButtons";
 import CustomerReview from "../components/CustomerReview";
 import useCartStore from "../store/useCartStore";
@@ -11,9 +11,12 @@ import { IoHome as I2, IoLocationSharp as I3}from "react-icons/io5";
 const FaRegHeart = I1 as any;
 const IoHome = I2 as any;
 const IoLocationSharp = I3 as any;
+const FaArrowLeft = I4 as any;
+
 
 const ProductDetail = () => {
   const { id: productId } = useParams();
+  const navigate = useNavigate();
   const { addToCart, addedProducts, setShowCartDrawer, updateQuantity } =
     useCartStore();
   const [quantity, setQuantity] = useState(1);
@@ -125,7 +128,7 @@ const ProductDetail = () => {
           {["black", "white", "brown", "gray"].map((color) => (
             <button
               key={color}
-              className={`w-10 h-10 rounded-full border ${
+              className={`w-10 h-10 rounded-full border focus:border-purple-600 focus:border-2 ${
                 color === "white" ? "border-gray-400" : ""
               }`}
               style={{ backgroundColor: color }}
@@ -141,7 +144,7 @@ const ProductDetail = () => {
           {["XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL"].map((size) => (
             <button
               key={size}
-              className="border p-2 text-sm rounded hover:bg-gray-100"
+              className="border p-2 text-sm rounded focus:border-purple-600 hover:bg-gray-100"
             >
               {size}
             </button>
@@ -206,7 +209,8 @@ const ProductDetail = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="flex gap-24 mx-24 !pb-0 pt-10 border px-[50px]">
+      <button onClick={()=>navigate(-1)} className="flex items-center gap-2 p-2 self-start ml-24 text-purple-600 hover:underline"><FaArrowLeft /> Go Back</button>
+      <div className="flex gap-24 mx-24 !pb-0 pt-10 px-[50px]">
         <ImgSection />
         <InfoSection />
       </div>
